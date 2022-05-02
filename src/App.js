@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
+import Header from "./components/Header/Header";
+import Form from "./components/Form/Form";
+import List from "./components/List/List";
+import Footer from "./components/Footer/Footer";
+import "./components/style.css";
+import { useEffect } from "react";
 function App() {
+  const [todos, setTodos] = useState([
+    { todo: "yapılacaklar 1", done: true },
+    { todo: "yapılacaklar 2", done: true },
+    { todo: "yapılacaklar 3", done: false },
+  ]);
+  useEffect(() => {
+    console.log(todos);
+  });
+  const [activeFilter, setActiveFilter] = useState("all");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Form todos={todos} setTodos={setTodos} />
+      <List todos={todos} setTodos={setTodos} activeFilter={activeFilter} />
+      <Footer
+        todos={todos}
+        setTodos={setTodos}
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+      />
     </div>
   );
 }
